@@ -1,16 +1,12 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   images: {
     domains: ["res.cloudinary.com", "randomuser.me"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "edmy-react.hibootstrap.com",
-        port: "",
-        pathname: "/images/banner/**",
-      },
-    ],
+  },
+  experimental: {
+    reactRoot: true,
+    suppressHydrationWarning: true,
   },
 };
 

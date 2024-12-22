@@ -41,26 +41,26 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   } = useLoadUserQuery(undefined, {});
 
   useEffect(() => {
-    // if (!isLoading) {
-    if (!userData) {
-      if (data) {
-        socialAuth({
-          email: data?.user?.email,
-          name: data?.user?.name,
-          avatar: data.user?.image,
-        });
-        refetch();
+    if (!isLoading) {
+      if (!userData) {
+        if (data) {
+          socialAuth({
+            email: data?.user?.email,
+            name: data?.user?.name,
+            avatar: data.user?.image,
+          });
+          refetch();
+        }
+      }
+      if (data === null) {
+        if (isSuccess) {
+          toast.success("Đăng nhập thành công!");
+        }
+      }
+      if (data === null && !isLoading && !userData) {
+        setLogout(true);
       }
     }
-    if (data === null) {
-      if (isSuccess) {
-        toast.success("Đăng nhập thành công!");
-      }
-    }
-    if (data === null && !isLoading && !userData) {
-      setLogout(true);
-    }
-    // }
   }, [data, userData, isLoading]);
 
   if (typeof window !== "undefined") {
