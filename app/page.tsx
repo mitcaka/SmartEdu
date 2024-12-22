@@ -9,6 +9,8 @@ interface Props {}
 const Page: FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
+  const [route, setRoute] = useState("Login");
+
   return (
     <div>
       <Heading
@@ -16,7 +18,13 @@ const Page: FC<Props> = (props) => {
         description="Học khôn ngoan mà không gian nan"
         keywords="Lập trình, Tiếng anh cơ bản, TOEIC, IELTS"
       />
-      <Header open={open} activeItem={activeItem} setOpen={setOpen} />
+      <Header
+        open={open}
+        activeItem={activeItem}
+        setOpen={setOpen}
+        setRoute={setRoute}
+        route={route}
+      />
       <Hero />
     </div>
   );
