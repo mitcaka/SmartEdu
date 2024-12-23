@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { styles } from "../../../app/styles/style";
 import React, { FC, useEffect, useState } from "react";
@@ -43,7 +44,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       console.log(error);
     }
     if (success) {
-      toast.success("Cập nhật ảnh đại diện thành công!");
+      toast.success("Cập nhật thông tin thành công!");
       setLoadUser(true);
     }
   }, [isSuccess, error, success, updateError]);
@@ -111,7 +112,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
             <input
               className={`w-full 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
               required
-              value="Update"
+              value="Cập nhật"
               type="submit"
             />
           </div>
