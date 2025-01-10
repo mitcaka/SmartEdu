@@ -59,7 +59,7 @@ const CourseData: FC<Props> = ({
     <div className="w-[80%] m-auto mt-24 block">
       <div>
         <label className={`${styles.label} text-[20px]`} htmlFor="email">
-          What are the benefits for students in this course?
+        Bạn sẽ học được gì từ khóa học này?
         </label>
         <br />
         {benefits.map((benefit: any, index: number) => (
@@ -67,7 +67,7 @@ const CourseData: FC<Props> = ({
             type="text"
             key={index}
             name="Benefit"
-            placeholder="You will be able to build a full stack LMS Platform..."
+            placeholder="Lập trình fullstack từ con số 0..."
             required
             className={`${styles.input} my-2`}
             value={benefit.title}
@@ -82,7 +82,7 @@ const CourseData: FC<Props> = ({
 
       <div>
         <label className={`${styles.label} text-[20px]`} htmlFor="email">
-        What are the prerequisites for starting this course?
+        Yêu cầu cần có để bắt đầu khóa học này là gì?
         </label>
         <br />
         {prerequisites.map((prerequisites: any, index: number) => (
@@ -90,7 +90,7 @@ const CourseData: FC<Props> = ({
             type="text"
             key={index}
             name="prerequisites"
-            placeholder="You need basic knowledge of MERN stack"
+            placeholder="Kiến thức lập trình cơ bản..."
             required
             className={`${styles.input} my-2`}
             value={prerequisites.title}
@@ -108,13 +108,13 @@ const CourseData: FC<Props> = ({
           className="w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
           onClick={() => prevButton()}
         >
-          Prev
+          Quay lại
         </div>
         <div
           className="w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
           onClick={() => handleOptions()}
         >
-          Next
+          Tiếp tục
         </div>
       </div>
     </div>

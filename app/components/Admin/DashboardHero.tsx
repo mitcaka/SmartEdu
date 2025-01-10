@@ -14,8 +14,7 @@ const DashboardHero = ({isDashboard}: Props) => {
       <DashboardHeader open={open} setOpen={setOpen} />
       {
         isDashboard && (
-          // <DashboardWidgets open={open} />
-          <DashboardWidgets />
+          <DashboardWidgets open={open} />
         )
       }
     </div>

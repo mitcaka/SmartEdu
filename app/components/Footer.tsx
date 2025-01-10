@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Link from "next/link";
 import React from "react";
 
@@ -12,7 +14,7 @@ const Footer = (props: Props) => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">
-              About
+              Về chúng tôi
             </h3>
             <ul className="space-y-4">
               <li>
@@ -28,7 +30,7 @@ const Footer = (props: Props) => {
                   href="/privacy-policy"
                   className="text-base text-black dark:text-gray-300 dark:hover:text-white"
                 >
-                  Privacy Policy
+                  Chính sách
                 </Link>
               </li>
               <li>
@@ -43,7 +45,7 @@ const Footer = (props: Props) => {
           </div>
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">
-              Quick Links
+              Truy cập nhanh
             </h3>
             <ul className="space-y-4">
               <li>
@@ -51,7 +53,7 @@ const Footer = (props: Props) => {
                   href="/courses"
                   className="text-base text-black dark:text-gray-300 dark:hover:text-white"
                 >
-                  Courses
+                  Khóa học
                 </Link>
               </li>
               <li>
@@ -59,7 +61,7 @@ const Footer = (props: Props) => {
                   href="/profile"
                   className="text-base text-black dark:text-gray-300 dark:hover:text-white"
                 >
-                  My Account
+                  Tài khoản
                 </Link>
               </li>
               <li>
@@ -67,14 +69,14 @@ const Footer = (props: Props) => {
                   href="/course-dashboard"
                   className="text-base text-black dark:text-gray-300 dark:hover:text-white"
                 >
-                  Course Dashboard
+                  Thông tin
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-3">
             <h3 className="text-[20px] font-[600] text-black dark:text-white">
-              Social Links
+              Mạng xã hội
             </h3>
             <ul className="space-y-4">
               <li>

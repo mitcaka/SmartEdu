@@ -34,8 +34,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
 
-  console.log(data);
-
   const {
     data: userData,
     isLoading,

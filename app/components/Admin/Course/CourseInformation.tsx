@@ -76,7 +76,7 @@ const CourseInformation: FC<Props> = ({
     <div className="w-[80%] m-auto mt-24">
       <form onSubmit={handleSubmit} className={`${styles.label}`}>
         <div>
-          <label htmlFor="">Course Name</label>
+          <label htmlFor="">Tên khóa học</label>
           <input
             type="name"
             name=""
@@ -86,20 +86,20 @@ const CourseInformation: FC<Props> = ({
               setCourseInfo({ ...courseInfo, name: e.target.value })
             }
             id="name"
-            placeholder="MERN stack LMS platform with next 13"
+            placeholder="Nhập tên khóa học..."
             className={`
             ${styles.input}`}
           />
         </div>
         <br />
         <div className="mb-5">
-          <label className={`${styles.label}`}>Course Description</label>
+          <label className={`${styles.label}`}>Mô tả khóa học</label>
           <textarea
             name=""
             id=""
             cols={30}
             rows={8}
-            placeholder="Write something amazing..."
+            placeholder="Nhập mô tả khóa học..."
             className={`${styles.input} !h-min !py-2`}
             value={courseInfo.description}
             onChange={(e: any) =>
@@ -110,7 +110,7 @@ const CourseInformation: FC<Props> = ({
         <br />
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
-            <label className={`${styles.label}`}>Course Price</label>
+            <label className={`${styles.label}`}>Giá khóa học</label>
             <input
               type="number"
               name=""
@@ -120,14 +120,14 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, price: e.target.value })
               }
               id="price"
-              placeholder="29"
+              placeholder="200000"
               className={`
             ${styles.input}`}
             />
           </div>
           <div className="w-[50%]">
             <label className={`${styles.label} w-[50%]`}>
-              Estimated Price (optional)
+              Giá ban đầu
             </label>
             <input
               type="number"
@@ -137,7 +137,7 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })
               }
               id="price"
-              placeholder="79"
+              placeholder="150000"
               className={`
             ${styles.input}`}
             />
@@ -147,7 +147,7 @@ const CourseInformation: FC<Props> = ({
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
             <label className={`${styles.label}`} htmlFor="email">
-              Course Tags
+              Tags khóa học
             </label>
             <input
               type="text"
@@ -158,14 +158,14 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, tags: e.target.value })
               }
               id="tags"
-              placeholder="MERN,Next 13,Socket io,tailwind css,LMS"
+              placeholder="ReactJS, NodeJs,..."
               className={`
             ${styles.input}`}
             />
           </div>
           <div className="w-[50%]">
             <label className={`${styles.label} w-[50%]`}>
-              Course Categories
+              Danh mục
             </label>
             <select
               name=""
@@ -176,7 +176,7 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, categories: e.target.value })
               }
             >
-              <option value="">Select Category</option>
+              <option value="">Chọn danh mục</option>
               {categories &&
                 categories.map((item: any) => (
                   <option value={item.title} key={item._id}>
@@ -189,7 +189,7 @@ const CourseInformation: FC<Props> = ({
         <br />
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
-            <label className={`${styles.label}`}>Course Level</label>
+            <label className={`${styles.label}`}>Cấp độ khóa học</label>
             <input
               type="text"
               name=""
@@ -199,13 +199,13 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, level: e.target.value })
               }
               id="level"
-              placeholder="Beginner/Intermediate/Expert"
+              placeholder="Mới bắt đầu/Trung cấp/Nâng cao"
               className={`
             ${styles.input}`}
             />
           </div>
           <div className="w-[50%]">
-            <label className={`${styles.label} w-[50%]`}>Demo Url</label>
+            <label className={`${styles.label} w-[50%]`}>Video demo</label>
             <input
               type="text"
               name=""
@@ -215,7 +215,7 @@ const CourseInformation: FC<Props> = ({
                 setCourseInfo({ ...courseInfo, demoUrl: e.target.value })
               }
               id="demoUrl"
-              placeholder="eer74fd"
+              placeholder="Nhập mã video..."
               className={`
             ${styles.input}`}
             />
@@ -247,7 +247,7 @@ const CourseInformation: FC<Props> = ({
               />
             ) : (
               <span className="text-black dark:text-white">
-                Drag and drop your thumbnail here or click to browse
+                Kéo và thả hình thu nhỏ của bạn vào đây hoặc nhấp để duyệt
               </span>
             )}
           </label>
@@ -256,7 +256,7 @@ const CourseInformation: FC<Props> = ({
         <div className="w-full flex items-center justify-end">
           <input
             type="submit"
-            value="Next"
+            value="Tiếp"
             className="w-full 800px:w-[180px] h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
           />
         </div>

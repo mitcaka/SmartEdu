@@ -6,10 +6,13 @@ import { Josefin_Sans } from "next/font/google";
 import { ThemeProvider } from "./utils/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
-import { Session, SessionProvider } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { FC, useEffect } from "react";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 import Loader from "./components/Loader/Loader";
+import socketIO from "socket.io-client";
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,9 +52,9 @@ export default function RootLayout({
 const Custom: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useLoadUserQuery({});
 
-  // useEffect(() => {
-  //   socketId.on("connection", () => {});
-  // }, []);
+  useEffect(() => {
+    socketId.on("connection", () => {});
+  }, []);
 
   return <div>{isLoading ? <Loader /> : <div>{children} </div>}</div>;
 };
