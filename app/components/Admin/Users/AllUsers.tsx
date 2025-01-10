@@ -7,7 +7,10 @@ import { Box, Button, Modal } from "@mui/material";
 import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
 import { useTheme } from "next-themes";
 import Loader from "../../Loader/Loader";
-import { format } from "timeago.js";
+import { format,register } from "timeago.js";
+import vi from "timeago.js/lib/lang/vi";
+
+register('vi', vi);
 import {
   useDeleteUserMutation,
   useGetAllUsersQuery,
@@ -71,7 +74,7 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
     { field: "created_at", headerName: "Ngày đăng ký", flex: 0.5 },
     {
       field: " ",
-      headerName: "Delete",
+      headerName: "Xóa",
       flex: 0.2,
       renderCell: (params: any) => {
         return (
@@ -121,7 +124,7 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
           email: item.email,
           role: item.role,
           courses: item.courses.length,
-          created_at: item.createdAt,
+          created_at: format(item.createdAt,'vi'),
         });
       });
   } else {
@@ -133,7 +136,7 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
           email: item.email,
           role: item.role,
           courses: item.courses.length,
-          created_at: item.createdAt,
+          created_at: format(item.createdAt,'vi'),
         });
       });
   }
@@ -196,7 +199,7 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
               "& .MuiDataGrid-columnHeaders": {
                 backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
                 borderBottom: "none",
-                color: theme === "dark" ? "#fff" : "#000",
+                color: theme === "dark" ? "#000" : "#000",
               },
               "& .MuiDataGrid-virtualScroller": {
                 backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",
@@ -248,7 +251,7 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
                     className={`${styles.button} my-6 !h-[30px]`}
                     onClick={handleSubmit}
                   >
-                    Submit
+                    Đồng ý
                   </div>
                 </div>
               </Box>

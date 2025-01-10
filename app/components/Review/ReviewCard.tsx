@@ -29,7 +29,6 @@ const ReviewCard = (props: Props) => {
           </div>
           <Ratings rating={5} />
         </div>
-         {/* for mobile */}
          <div className="800px:hidden justify-between w-full flex flex-col">
           <div className="pl-4">
             <h5 className="text-[20px] text-black dark:text-white">

@@ -6,7 +6,7 @@ import Ratings from "@/app/utils/Ratings";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
-import { format } from "timeago.js";
+import { format, register } from "timeago.js";
 import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../Payment/CheckOutForm";
@@ -14,7 +14,9 @@ import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 import Image from "next/image";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { formatCurrency } from "@/app/utils/Format";
+import vi from "timeago.js/lib/lang/vi";
 
+register('vi', vi);
 type Props = {
   data: any;
   stripePromise: any;
@@ -183,12 +185,12 @@ const CourseDetails = ({
                           {item.comment}
                         </p>
                         <small className="text-[#000000d1] dark:text-[#ffffff83]">
-                          {format(item.createdAt)} •
+                          {format(item.createdAt,'vi')} •
                         </small>
                       </div>
                       <div className="pl-2 flex 800px:hidden items-center">
                         <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                          {item.user.name}
+                          {item.user.name} 
                         </h5>
                         <Ratings rating={item.rating} />
                       </div>
@@ -210,12 +212,14 @@ const CourseDetails = ({
                         </div>
                         <div className="pl-2">
                           <div className="flex items-center">
-                            <h5 className="text-[20px]">{i.user.name}</h5>{" "}
+                            <h5 className="text-[18px] pr-2 text-black dark:text-white">{i.user.name}</h5>{" "}
                             <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
                           </div>
-                          <p>{i.comment}</p>
-                          <small className="text-[#ffffff83]">
-                            {format(i.createdAt)} •
+                          <p className="text-black dark:text-white">
+                            {i.comment}
+                          </p>
+                          <small className="text-[#000000d1] dark:text-[#ffffff83]">
+                            {format(i.createdAt,'vi')} •
                           </small>
                         </div>
                       </div>

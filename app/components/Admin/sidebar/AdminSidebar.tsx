@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, JSX, useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
 import {
@@ -178,7 +178,7 @@ const AdminSidebar = () => {
             <Item
               title="Trang chủ"
               to="/admin"
-              icon={<HomeOutlinedIcon />}
+              icon={<HomeOutlinedIcon className="text-black dark:text-white"/>}
               selected={selected}
               setSelected={setSelected}
             />

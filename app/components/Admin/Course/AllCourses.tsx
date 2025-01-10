@@ -13,10 +13,13 @@ import {
   useGetAllCoursesQuery,
 } from "@/redux/features/courses/coursesApi";
 import Loader from "../../Loader/Loader";
-import { format } from "timeago.js";
+import { format, register } from "timeago.js";
 import { styles } from "@/app/styles/style";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
+import vi from "timeago.js/lib/lang/vi";
+
+register('vi', vi);
 
 type Props = {};
 
@@ -83,7 +86,7 @@ const AllCourses = (props: Props) => {
           title: item.name,
           ratings: item.ratings,
           purchased: item.purchased,
-          created_at: format(item.createdAt),
+          created_at: format(item.createdAt,'vi'),
         });
       });
   }
@@ -146,7 +149,7 @@ const AllCourses = (props: Props) => {
               "& .MuiDataGrid-columnHeaders": {
                 backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
                 borderBottom: "none",
-                color: theme === "dark" ? "#fff" : "#000",
+                color: theme === "dark" ? "#000" : "#000",
               },
               "& .MuiDataGrid-virtualScroller": {
                 backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",

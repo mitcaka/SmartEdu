@@ -9,7 +9,7 @@ import {
   useGetCourseDetailsQuery,
 } from "@/redux/features/courses/coursesApi";
 import Image from "next/image";
-import { format } from "timeago.js";
+import { format,register } from "timeago.js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import {
@@ -24,7 +24,9 @@ import Ratings from "@/app/utils/Ratings";
 import socketIO from "socket.io-client";
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
+import vi from "timeago.js/lib/lang/vi";
 
+register('vi', vi);
 type Props = {
   data: any;
   id: string;
@@ -435,7 +437,7 @@ const CourseContentMedia = ({
                           <Ratings rating={item.rating} />
                           <p>{item.comment}</p>
                           <small className="text-[#0000009e] dark:text-[#ffffff83]">
-                            {format(item.createdAt)} •
+                            {format(item.createdAt,'vi')} •
                           </small>
                         </div>
                       </div>
@@ -492,7 +494,7 @@ const CourseContentMedia = ({
                             </div>
                             <p>{i.comment}</p>
                             <small className="text-[#ffffff83]">
-                              {format(i.createdAt)} •
+                              {format(i.createdAt,'vi')} •
                             </small>
                           </div>
                         </div>
@@ -573,7 +575,7 @@ const CommentItem = ({
             <h5 className="text-[20px]">{item?.user.name}</h5>
             <p>{item?.question}</p>
             <small className="text-[#000000b8] dark:text-[#ffffff83]">
-              {!item.createdAt ? "" : format(item?.createdAt)} •
+              {!item.createdAt ? "" : format(item?.createdAt,'vi')} •
             </small>
           </div>
         </div>
@@ -626,7 +628,7 @@ const CommentItem = ({
                   </div>
                   <p>{item.answer}</p>
                   <small className="text-[#ffffff83]">
-                    {format(item.createdAt)} •
+                    {format(item.createdAt,'vi')} •
                   </small>
                 </div>
               </div>

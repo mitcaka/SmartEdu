@@ -7,12 +7,15 @@ import { Box } from "@mui/material";
 import { useTheme } from "next-themes";
 import { useGetAllCoursesQuery } from "@/redux/features/courses/coursesApi";
 import Loader from "../../Loader/Loader";
-import { format } from "timeago.js";
+import { format,register } from "timeago.js";
 
 import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import { AiOutlineMail } from "react-icons/ai";
 import { useGetAllOrdersQuery } from "@/redux/features/orders/ordersApi";
 import { formatCurrency } from "@/app/utils/Format";
+import vi from "timeago.js/lib/lang/vi";
+
+register('vi', vi);
 
 type Props = {
   isDashboard?: boolean;
@@ -58,7 +61,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
         ]),
     { field: "price", headerName: "Giá tiền", flex: 0.5 },
     ...(isDashboard
-      ? [{ field: "created_at", headerName: "Created At", flex: 0.5 }]
+      ? [{ field: "created_at", headerName: "Ngày tạo", flex: 0.5 }]
       : [
           {
             field: " ",
@@ -88,7 +91,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
         userEmail: item.userEmail,
         title: item.title,
         price: formatCurrency(item.price),
-        created_at: format(item.createdAt),
+        created_at: format(item.createdAt,'vi'),
       });
     });
 
@@ -132,7 +135,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
               "& .MuiDataGrid-columnHeaders": {
                 backgroundColor: theme === "dark" ? "#3e4396" : "#A4A9FC",
                 borderBottom: "none",
-                color: theme === "dark" ? "#fff" : "#000",
+                color: theme === "dark" ? "#000" : "#000",
               },
               "& .MuiDataGrid-virtualScroller": {
                 backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",

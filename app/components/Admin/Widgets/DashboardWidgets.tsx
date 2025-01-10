@@ -108,7 +108,7 @@ const DashboardWidgets: FC<Props> = ({ open }) => {
                   {ordersComparePercentage?.currentMonth}
                 </h5>
                 <h5 className="py-2 font-Poppins dark:text-[#45CBA0] text-black text-[20px] font-[400]">
-                  Sales Obtained
+                  Hóa đơn
                 </h5>
               </div>
               <div>
@@ -117,7 +117,7 @@ const DashboardWidgets: FC<Props> = ({ open }) => {
                   ? 100 
                   : 0
                 } open={open} />
-                <h5 className="text-center pt-4">
+                <h5 className="text-center pt-4 dark:text-[#fff]">
                  {
                   ordersComparePercentage?.percentChange > 0 
                   ? "+" + ordersComparePercentage?.percentChange.toFixed(2)
@@ -145,7 +145,7 @@ const DashboardWidgets: FC<Props> = ({ open }) => {
                   ? 100 
                   : 0
                 } open={open} />
-                <h5 className="text-center pt-4">
+                <h5 className="text-center pt-4 dark:text-[#fff]">
                   {userComparePercentage?.percentChange > 0
                     ? "+" + userComparePercentage?.percentChange.toFixed(2) 
                     : "-" + userComparePercentage?.percentChange.toFixed(2)} %

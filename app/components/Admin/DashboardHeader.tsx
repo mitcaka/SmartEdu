@@ -6,9 +6,12 @@ import { useGetAllNotificationsQuery, useUpdateNotificationStatusMutation } from
 import React, { FC, useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import socketIO from "socket.io-client";
-import { format } from "timeago.js";
+import { format, register } from "timeago.js";
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
+import vi from "timeago.js/lib/lang/vi";
+
+register('vi', vi);
 
 type Props = {
   open?: boolean;
@@ -85,14 +88,14 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
                     className="text-black dark:text-white cursor-pointer"
                     onClick={() => handleNotificationStatusChange(item._id)}
                   >
-                    Mark as read
+                    Đánh dấu đọc
                   </p>
                 </div>
                 <p className="px-2 text-black dark:text-white">
                   {item.message}
                 </p>
                 <p className="p-2 text-black dark:text-white text-[14px]">
-                  {format(item.createdAt)}
+                  {format(item.createdAt,'vi')}
                 </p>
               </div>
             ))}
