@@ -22,9 +22,14 @@ const CourseData: FC<Props> = ({
   setActive,
 }) => {
 
-  const handleBenefitChange = (index: number, value: any) => {
-    const updatedBenefits = [...benefits];
-    updatedBenefits[index].title = value;
+  const handleBenefitChange = (index: number, value: string) => {
+    const updatedBenefits = benefits.map((benefit, i) => {
+      if (i === index) {
+        return { ...benefit, title: value };
+      }
+      return benefit;
+    });
+    
     setBenefits(updatedBenefits);
   };
 
@@ -32,9 +37,14 @@ const CourseData: FC<Props> = ({
     setBenefits([...benefits, { title: "" }]);
   };
 
-  const handlePrerequisitesChange = (index: number, value: any) => {
-    const updatedPrerequisites = [...prerequisites];
-    updatedPrerequisites[index].title = value;
+  const handlePrerequisitesChange = (index: number, value: string) => {
+    const updatedPrerequisites = prerequisites.map((prerequisite, i) => {
+      if (i === index) {
+        return { ...prerequisite, title: value };
+      }
+      return prerequisite;
+    });
+  
     setPrerequisites(updatedPrerequisites);
   };
 
@@ -50,7 +60,7 @@ const CourseData: FC<Props> = ({
     if (benefits[benefits.length - 1]?.title !== "" && prerequisites[prerequisites.length - 1]?.title !== "") {
       setActive(active + 1);
     } else{
-        toast.error("Please fill the fields for go to next!")
+        toast.error("Điền đầy đủ các trường thông tin trước khi qua phần kế tiếp!")
     }
   };
   

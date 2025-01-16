@@ -1,0 +1,14 @@
+Stripe cung cấp một số thẻ test để bạn có thể kiểm tra các tính năng thanh toán mà không cần sử dụng thẻ thật. Dưới đây là một số thẻ test phổ biến mà bạn có thể sử dụng:
+
+Thẻ tín dụng test:
+Visa: 4242 4242 4242 4242
+Mastercard: 5555 5555 5555 4444
+American Express: 3782 8224 6310 005
+Discover: 6011 1111 1111 1117
+Ngày hết hạn và CVV:
+Ngày hết hạn: Bất kỳ ngày trong tương lai (ví dụ: 12/25)
+CVV: Bất kỳ ba số (đối với Visa, Mastercard, Discover) hoặc bốn số (đối với American Express).
+Thẻ test cho các trường hợp đặc biệt:
+Thẻ yêu cầu xác thực 3D Secure: 4000 0000 0000 3063
+Thẻ bị từ chối: 4000 0000 0000 0002
+Thẻ không hợp lệ: 4000 0000 0000 9995

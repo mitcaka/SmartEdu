@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useGetUsersAllCoursesQuery } from "@/redux/features/courses/coursesApi";
 import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
@@ -21,25 +24,36 @@ const Page = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [courses, setcourses] = useState([]);
   const [category, setCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 8;
 
   useEffect(() => {
-    if (category === "All") {
-      setcourses(data?.courses);
-    }
-    if (category !== "All") {
-      setcourses(
-        data?.courses.filter((item: any) => item.categories === category),
-      );
-    }
-    if (search) {
-      setcourses(
-        data?.courses.filter((item: any) =>
-          item.name.toLowerCase().includes(search.toLowerCase()),
-        ),
-      );
-    }
-  }, [data, category, search]);
+    if (data) {
+      let filteredCourses = data.courses;
 
+      if (category !== "All") {
+        filteredCourses = filteredCourses.filter(
+          (item: any) => item.categories === category
+        );
+      }
+
+      if (search) {
+        filteredCourses = filteredCourses.filter((item: any) =>
+          item.name.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+
+      const indexOfLastCourse = currentPage * perPage;
+      const indexOfFirstCourse = indexOfLastCourse - perPage;
+      const currentCourses = filteredCourses.slice(
+        indexOfFirstCourse,
+        indexOfLastCourse
+      );
+
+      setcourses(currentCourses);
+    }
+  }, [data, category, search, currentPage]);
+  const totalPages = Math.ceil(data?.courses.length / perPage);
   const categories = categoriesData?.layout.categories;
 
   return (
@@ -67,8 +81,8 @@ const Page = (props: Props) => {
             <div className="w-full flex items-center flex-wrap">
               <div
                 className={`h-[35px] ${
-                  category === "All" ? "bg-[crimson]" : "bg-[#5050cb]"
-                } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
+                  category === "All" ? "bg-[crimson]" : "bg-cyan-600"
+                } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer text-white`}
                 onClick={() => setCategory("All")}
               >
                 Tất cả
@@ -80,8 +94,8 @@ const Page = (props: Props) => {
                       className={`h-[35px] ${
                         category === item.title
                           ? "bg-[crimson]"
-                          : "bg-[#5050cb]"
-                      } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer`}
+                          : "bg-cyan-600"
+                      } m-3 px-3 rounded-[30px] flex items-center justify-center font-Poppins cursor-pointer text-white`}
                       onClick={() => setCategory(item.title)}
                     >
                       {item.title}
@@ -106,7 +120,25 @@ const Page = (props: Props) => {
                   <CourseCard item={item} key={index} />
                 ))}
             </div>
+            <div className="flex justify-between items-center my-4 p-4 rounded-lg shadow-md dark:bg-slate-500 dark:bg-opacity-20 backdrop-blur border dark:border-[#ffffff1d] border-[#00000015] dark:shadow-[bg-slate-700] max-w-3xl mx-auto">
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`bg-blue-500 text-white p-2 rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
+                Trang trước
+              </button>
+              <span className="font-semibold text-black dark:text-[#fff]">{`Trang ${currentPage} / ${totalPages}`}</span>
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`bg-blue-500 text-white p-2 rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
+                Trang kế
+              </button>
+            </div>
           </div>
+
           <Footer />
         </>
       )}

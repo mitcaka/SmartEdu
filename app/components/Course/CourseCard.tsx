@@ -6,7 +6,6 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
-
 type Props = {
   item: any;
   isProfile?: boolean;
@@ -22,13 +21,28 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
           src={item.thumbnail.url}
           width={500}
           height={300}
-          objectFit="contain"
+          style={{
+            width: "100%",
+            height: "150px",
+            objectFit: "cover",
+            borderRadius: "0.5rem",
+          }}
           className="rounded w-full"
           alt=""
         />
         <br />
-        <h1 className="font-Poppins text-[16px] text-black dark:text-[#fff]">
-          {item.name} 
+        <h1
+          className="font-Poppins text-[16px] text-black dark:text-[#fff]"
+          style={{
+            overflow: "hidden", // Ẩn phần văn bản vượt quá
+            display: "-webkit-box", // Sử dụng flexbox để quản lý số dòng
+            WebkitLineClamp: 2, // Giới hạn số dòng tối đa là 2
+            WebkitBoxOrient: "vertical", // Định hướng theo chiều dọc
+            lineClamp: 2, // Hỗ trợ cho trình duyệt không phải WebKit
+            height: "3em", // Căn chỉnh chiều cao cho 2 dòng
+          }}
+        >
+          {item.name}
         </h1>
         <div className="w-full flex items-center justify-between pt-2">
           <Ratings rating={item.ratings} />

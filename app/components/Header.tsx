@@ -61,7 +61,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         setLogout(true);
       }
     }
-  }, [data, userData, isLoading]);
+  }, [data, userData, isLoading, user]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -80,7 +80,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       }
     }
   };
-
+  
   return (
     <div className="w-full relative">
       <div

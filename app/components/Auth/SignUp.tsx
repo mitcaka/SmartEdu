@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { FC, useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -58,11 +59,11 @@ const SignUp: FC<Props> = ({ setRoute }) => {
 
   return (
     <div className="w-full">
-      <h1 className={`${styles.title}`}>Join to ELearning</h1>
+      <h1 className={`${styles.title}`}>Đăng ký tài khoản SmartEdu</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className={`${styles.label}`} htmlFor="email">
-            Enter your Name
+            Nhập tên của bạn
           </label>
           <input
             type="text"
@@ -70,7 +71,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             value={values.name}
             onChange={handleChange}
             id="name"
-            placeholder="johndoe"
+            placeholder="Nguyễn Mai"
             className={`${errors.name && touched.name && "border-red-500"} ${
               styles.input
             }`}
@@ -80,7 +81,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           )}
         </div>
         <label className={`${styles.label}`} htmlFor="email">
-          Enter your Email
+          Nhập email của bạn
         </label>
         <input
           type="email"
@@ -98,7 +99,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
         )}
         <div className="w-full mt-5 relative mb-1">
           <label className={`${styles.label}`} htmlFor="email">
-            Enter your password
+            Nhập mật khẩu
           </label>
           <input
             type={!show ? "password" : "text"}
@@ -129,23 +130,23 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           <span className="text-red-500 pt-2 block">{errors.password}</span>
         )}
         <div className="w-full mt-5">
-          <input type="submit" value="Sign Up" className={`${styles.button}`} />
+          <input type="submit" value="Đăng ký" className={`${styles.button}`} />
         </div>
         <br />
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
-          Or join with
+          Hoặc đăng ký với
         </h5>
         <div className="flex items-center justify-center my-3">
           <FcGoogle size={30} className="cursor-pointer mr-2" />
           <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
         <h5 className="text-center pt-4 font-Poppins text-[14px]">
-          Already have an account?{" "}
+          Đã có tài khoản?{" "}
           <span
             className="text-[#2190ff] pl-1 cursor-pointer"
             onClick={() => setRoute("Login")}
           >
-            Sign in
+           Đăng nhập
           </span>
         </h5>
       </form>

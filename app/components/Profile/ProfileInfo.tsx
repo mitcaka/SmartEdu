@@ -23,6 +23,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
     useEditProfileMutation();
   const [loadUser, setLoadUser] = useState(false);
   const {} = useLoadUserQuery(undefined, { skip: loadUser ? false : true });
+  const [currentAvatar, setCurrentAvatar] = useState(user.avatar || avatar ? user.avatar.url || avatar : avatarIcon)
 
   const imageHandler = async (e: any) => {
     const fileReader = new FileReader();
@@ -30,6 +31,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
     fileReader.onload = () => {
       if (fileReader.readyState === 2) {
         const avatar = fileReader.result;
+        setCurrentAvatar(avatar);
         updateAvatar(avatar);
       }
     };
@@ -63,7 +65,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       <div className="w-full flex justify-center">
         <div className="relative">
           <Image
-            src={user.avatar || avatar ? user.avatar.url || avatar : avatarIcon}
+            src={currentAvatar}
             alt=""
             width={120}
             height={120}

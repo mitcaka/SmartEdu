@@ -12,7 +12,7 @@ type Props = {
 }
 
 const Page = ({params}: Props) => {
-    const unwrappedParams = React.use(params);
+    const unwrappedParams: any = React.use(params);
     const id = unwrappedParams.id;
   const { isLoading, error, data,refetch } = useLoadUserQuery(undefined, {});
 

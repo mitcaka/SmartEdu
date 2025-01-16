@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useEffect, useState } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useTheme } from "next-themes";
 import { useGetAllCoursesQuery } from "@/redux/features/courses/coursesApi";
@@ -21,13 +21,22 @@ type Props = {
   isDashboard?: boolean;
 };
 
+type Order = {
+  _id: string;
+  userName: string;
+  userEmail: string;
+  title: string;
+  price: number;
+  createdAt: string;
+};
+
 const AllInvoices = ({ isDashboard }: Props) => {
   const { theme, setTheme } = useTheme();
   const { isLoading, data } = useGetAllOrdersQuery({});
   const { data: usersData } = useGetAllUsersQuery({});
   const { data: coursesData } = useGetAllCoursesQuery({});
 
-  const [orderData, setOrderData] = useState<any>([]);
+  const [orderData, setOrderData] =  useState<Order[]>([]);
 
   useEffect(() => {
     if (data) {
@@ -43,44 +52,66 @@ const AllInvoices = ({ isDashboard }: Props) => {
           userName: user?.name,
           userEmail: user?.email,
           title: course?.name,
-          price: course?.price,
+          price: course ? course.price : 0,
         };
       });
       setOrderData(temp);
     }
   }, [data, usersData, coursesData]);
 
-  const columns: any = [
+  // const columns: any = [
+  //   { field: "id", headerName: "ID", flex: 0.3 },
+  //   { field: "userName", headerName: "Tên học viên", flex: isDashboard ? 0.6 : 0.5 },
+  //   ...(isDashboard
+  //     ? []
+  //     : [
+  //         { field: "userEmail", headerName: "Email", flex: 1 },
+  //         { field: "title", headerName: "Tên khóa học", flex: 1 },
+  //       ]),
+  //   { field: "price", headerName: "Giá tiền", flex: 0.5 },
+  //   ...(isDashboard
+  //     ? [{ field: "created_at", headerName: "Ngày tạo", flex: 0.5 }]
+  //     : [
+  //         {
+  //           field: " ",
+  //           headerName: "Email",
+  //           flex: 0.2,
+  //           renderCell: (params: any) => {
+  //             return (
+  //               <a href={`mailto:${params.row.userEmail}`}>
+  //                 <AiOutlineMail
+  //                   className="dark:text-white text-black mt-4"
+  //                   size={20}
+  //                 />
+  //               </a>
+  //             );
+  //           },
+  //         },
+  //       ]),
+  // ];
+  const columns: GridColDef[] = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "userName", headerName: "Tên học viên", flex: isDashboard ? 0.6 : 0.5 },
-    ...(isDashboard
-      ? []
-      : [
-          { field: "userEmail", headerName: "Email", flex: 1 },
-          { field: "title", headerName: "Tên khóa học", flex: 1 },
-        ]),
+    ...(isDashboard ? [] : [
+        { field: "userEmail", headerName: "Email", flex: 1 },
+        { field: "title", headerName: "Tên khóa học", flex: 1 },
+      ]),
     { field: "price", headerName: "Giá tiền", flex: 0.5 },
-    ...(isDashboard
-      ? [{ field: "created_at", headerName: "Ngày tạo", flex: 0.5 }]
-      : [
-          {
-            field: " ",
-            headerName: "Email",
-            flex: 0.2,
-            renderCell: (params: any) => {
-              return (
-                <a href={`mailto:${params.row.userEmail}`}>
-                  <AiOutlineMail
-                    className="dark:text-white text-black mt-4"
-                    size={20}
-                  />
-                </a>
-              );
-            },
-          },
-        ]),
+    ...(isDashboard ? [
+        { field: "created_at", headerName: "Ngày tạo", flex: 0.5 },
+      ] : [
+        {
+          field: "emailAction",
+          headerName: "Email",
+          flex: 0.2,
+          renderCell: (params: any) => (
+            <a href={`mailto:${params.row.userEmail}`}>
+              <AiOutlineMail className="dark:text-white text-black mt-4" size={20} />
+            </a>
+          ),
+        },
+      ]),
   ];
-
   const rows: any = [];
 
   orderData &&
@@ -93,6 +124,8 @@ const AllInvoices = ({ isDashboard }: Props) => {
         price: formatCurrency(item.price),
         created_at: format(item.createdAt,'vi'),
       });
+      console.log(item.price);
+      
     });
 
   return (
@@ -158,7 +191,6 @@ const AllInvoices = ({ isDashboard }: Props) => {
               checkboxSelection={isDashboard ? false : true}
               rows={rows}
               columns={columns}
-              components={isDashboard ? {} : { Toolbar: GridToolbar }}
             />
           </Box>
         </Box>

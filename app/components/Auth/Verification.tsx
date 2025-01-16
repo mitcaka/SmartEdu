@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { styles } from "@/app/styles/style";
 import { useActivationMutation } from "@/redux/features/auth/authApi";
 import React, { FC, useEffect, useRef, useState } from "react";

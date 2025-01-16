@@ -127,14 +127,32 @@ const CourseContent: FC<Props> = ({
     }
   };
 
+  function handleSectionChange(index: number, value: string): void {
+    const updatedData = courseContentData.map((section, i) => {
+      if (i === index) {
+        return { ...section, videoSection: value };
+      }
+      return section;
+    });
+    setCourseContentData(updatedData);
+  }
+
+  function handleDataChange(index: number, value: string): void {
+    const updatedData = courseContentData.map((item, i) => {
+      if (i === index) {
+        return { ...item, title: value }; 
+      }
+      return item;
+    });
+    setCourseContentData(updatedData);
+  }
   return (
     <div className="w-[80%] m-auto mt-24 p-3">
       <form onSubmit={handleSubmit}>
         {courseContentData?.map((item: any, index: number) => {
           const showSectionInput =
             index === 0 ||
-            item.videoSection !== courseContentData[index - 1].videoSection;
-
+            item.videoSection !== courseContentData[index - 1].videoSection
           return (
             <>
               <div
@@ -154,11 +172,7 @@ const CourseContent: FC<Props> = ({
                             : "w-min"
                         } font-Poppins cursor-pointer dark:text-white text-black bg-transparent outline-none`}
                         value={item.videoSection}
-                        onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].videoSection = e.target.value;
-                          setCourseContentData(updatedData);
-                        }}
+                        onChange={(e) => handleSectionChange(index, e.target.value)}
                       />
                       <BsPencil className="cursor-pointer dark:text-white text-black" />
                     </div>
@@ -216,11 +230,7 @@ const CourseContent: FC<Props> = ({
                         placeholder="Bài học 1..."
                         className={`${styles.input}`}
                         value={item.title}
-                        onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].title = e.target.value;
-                          setCourseContentData(updatedData);
-                        }}
+                        onChange={(e) => handleDataChange(index, e.target.value)}
                       />
                     </div>
                     <div className="mb-3">
@@ -231,8 +241,12 @@ const CourseContent: FC<Props> = ({
                         className={`${styles.input}`}
                         value={item.videoUrl}
                         onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].videoUrl = e.target.value;
+                          const updatedData = courseContentData.map((item, i) => {
+                            if (i === index) {
+                              return { ...item, videoUrl: e.target.value };
+                            }
+                            return item;
+                          });
                           setCourseContentData(updatedData);
                         }}
                       />
@@ -245,8 +259,12 @@ const CourseContent: FC<Props> = ({
                         className={`${styles.input}`}
                         value={item.videoLength}
                         onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].videoLength = e.target.value;
+                          const updatedData = courseContentData.map((item, i) => {
+                            if (i === index) {
+                              return { ...item, videoLength: e.target.value };
+                            }
+                            return item;
+                          });
                           setCourseContentData(updatedData);
                         }}
                       />
@@ -262,8 +280,12 @@ const CourseContent: FC<Props> = ({
                         className={`${styles.input} !h-min py-2`}
                         value={item.description}
                         onChange={(e) => {
-                          const updatedData = [...courseContentData];
-                          updatedData[index].description = e.target.value;
+                          const updatedData = courseContentData.map((item, i) => {
+                            if (i === index) {
+                              return { ...item, description: e.target.value };
+                            }
+                            return item;
+                          });
                           setCourseContentData(updatedData);
                         }}
                       />
@@ -294,9 +316,18 @@ const CourseContent: FC<Props> = ({
                           className={`${styles.input}`}
                           value={link.title}
                           onChange={(e) => {
-                            const updatedData = [...courseContentData];
-                            updatedData[index].links[linkIndex].title =
-                              e.target.value;
+                            const updatedData = courseContentData.map((item, i) => {
+                              if (i === index) {
+                                const updatedLinks = item.links.map((link, j) => {
+                                  if (j === linkIndex) {
+                                    return { ...link, title: e.target.value };
+                                  }
+                                  return link;
+                                });
+                                return { ...item, links: updatedLinks };
+                              }
+                              return item;
+                            });
                             setCourseContentData(updatedData);
                           }}
                         />
@@ -306,9 +337,18 @@ const CourseContent: FC<Props> = ({
                           className={`${styles.input} mt-6`}
                           value={link.url}
                           onChange={(e) => {
-                            const updatedData = [...courseContentData];
-                            updatedData[index].links[linkIndex].url =
-                              e.target.value;
+                            const updatedData = courseContentData.map((item, i) => {
+                              if (i === index) {
+                                const updatedLinks = item.links.map((link, j) => {
+                                  if (j === linkIndex) {
+                                    return { ...link, url: e.target.value };
+                                  }
+                                  return link;
+                                });
+                                return { ...item, links: updatedLinks };
+                              }
+                              return item;
+                            });
                             setCourseContentData(updatedData);
                           }}
                         />

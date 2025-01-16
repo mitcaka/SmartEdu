@@ -5,7 +5,7 @@ import CourseDetailsPage from "../../components/Course/CourseDetailsPage";
 
 
 const Page = ({params}:any) => {
-    const unwrappedParams = use(params);
+    const unwrappedParams:any = use(params);
     return (
         <div>
             <CourseDetailsPage id={unwrappedParams.id} />

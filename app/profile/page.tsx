@@ -18,6 +18,7 @@ const page: FC<Props> = (props: Props) => {
   const [activeItem, setActiveItem] = useState(5);
   const [route, setRoute] = useState("Login");
   const { user } = useSelector((state: any) => state.auth);
+  
   return (
     <div className="min-h-screen">
       <Protected>

@@ -44,6 +44,7 @@ const CheckOutForm = ({ data,user,refetch }: Props) => {
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       setIsLoading(false);
       createOrder({ courseId: data._id, payment_info: paymentIntent });
+      toast.success("Thanh toán thành công!");
     }
   };
 

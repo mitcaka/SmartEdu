@@ -74,7 +74,7 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
       {open && (
         <div className="w-[350px] h-[60vh] overflow-y-scroll py-3 px-2 border border-[#ffffff0c] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-[1000000000] rounded">
           <h5 className="text-center text-[20px] font-Poppins text-black dark:text-white p-3">
-            Notifications
+            Thông báo
           </h5>
           {notifications &&
             notifications.map((item: any, index: number) => (
