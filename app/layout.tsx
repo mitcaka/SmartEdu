@@ -4,7 +4,6 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { Josefin_Sans } from "next/font/google";
 import { ThemeProvider } from "./utils/theme-provider";
-import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
@@ -40,7 +39,6 @@ export default function RootLayout({
       >
         <Providers>
           <SessionProvider>
-            <CartProvider>
               <ThemeProvider
                 attribute="class"
                 defaultTheme="system"
@@ -51,7 +49,6 @@ export default function RootLayout({
                   <Toaster position="top-center" reverseOrder={false} />
                 </Suspense>
               </ThemeProvider>
-            </CartProvider>
           </SessionProvider>
         </Providers>
       </body>

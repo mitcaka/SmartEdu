@@ -9,7 +9,7 @@ import {
   useGetCourseDetailsQuery,
 } from "@/redux/features/courses/coursesApi";
 import Image from "next/image";
-import { format,register } from "timeago.js";
+import { format, register } from "timeago.js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import {
@@ -25,8 +25,9 @@ import socketIO from "socket.io-client";
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 import vi from "timeago.js/lib/lang/vi";
+import { Badge } from "@mui/material";
 
-register('vi', vi);
+register("vi", vi);
 type Props = {
   data: any;
   id: string;
@@ -245,19 +246,21 @@ const CourseContentMedia = ({
       </h1>
       <br />
       <div className="w-full p-4 flex items-center justify-between bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner">
-        {["Tổng quan", "Tài nguyên", "Q&A", "Đánh giá"].map((text, index) => (
-          <h5
-            key={index}
-            className={`800px:text-[20px] cursor-pointer ${
-              activeBar === index
-                ? "text-red-500"
-                : "dark:text-white text-black"
-            }`}
-            onClick={() => setactiveBar(index)}
-          >
-            {text}
-          </h5>
-        ))}
+        {["Tổng quan", "Tài nguyên", "Hỏi đáp", "Đánh giá"].map(
+          (text, index) => (
+            <h5
+              key={index}
+              className={`800px:text-[20px] cursor-pointer ${
+                activeBar === index
+                  ? "text-red-500"
+                  : "dark:text-white text-black"
+              }`}
+              onClick={() => setactiveBar(index)}
+            >
+              {text}
+            </h5>
+          )
+        )}
       </div>
       <br />
       {activeBar === 0 && (
@@ -415,9 +418,11 @@ const CourseContentMedia = ({
             <div className="w-full">
               {(course?.reviews && [...course.reviews].reverse())?.map(
                 (item: any, index: number) => {
-                  
                   return (
-                    <div className="w-full my-5 dark:text-white text-black" key={index}>
+                    <div
+                      className="w-full my-5 dark:text-white text-black"
+                      key={index}
+                    >
                       <div className="w-full flex">
                         <div>
                           <Image
@@ -437,21 +442,22 @@ const CourseContentMedia = ({
                           <Ratings rating={item.rating} />
                           <p>{item.comment}</p>
                           <small className="text-[#0000009e] dark:text-[#ffffff83]">
-                            {format(item.createdAt,'vi')} •
+                            {format(item.createdAt, "vi")} •
                           </small>
                         </div>
                       </div>
-                      {user.role === "admin" && item.commentReplies.length === 0 && (
-                        <span
-                          className={`${styles.label} !ml-10 cursor-pointer`}
-                          onClick={() => {
-                            setIsReviewReply(true);
-                            setReviewId(item._id);
-                          }}
-                        >
-                          Trả lời
-                        </span>
-                      )}
+                      {user.role === "admin" &&
+                        item.commentReplies.length === 0 && (
+                          <span
+                            className={`${styles.label} !ml-10 cursor-pointer`}
+                            onClick={() => {
+                              setIsReviewReply(true);
+                              setReviewId(item._id);
+                            }}
+                          >
+                            Trả lời
+                          </span>
+                        )}
 
                       {isReviewReply && reviewId === item._id && (
                         <div className="w-full flex relative">
@@ -473,7 +479,10 @@ const CourseContentMedia = ({
                       )}
 
                       {item.commentReplies.map((i: any, index: number) => (
-                        <div className="w-full flex 800px:ml-16 my-5" key={index}>
+                        <div
+                          className="w-full flex 800px:ml-16 my-5"
+                          key={index}
+                        >
                           <div className="w-[50px] h-[50px]">
                             <Image
                               src={
@@ -494,7 +503,7 @@ const CourseContentMedia = ({
                             </div>
                             <p>{i.comment}</p>
                             <small className="text-[#ffffff83]">
-                              {format(i.createdAt,'vi')} •
+                              {format(i.createdAt, "vi")} •
                             </small>
                           </div>
                         </div>
@@ -572,10 +581,18 @@ const CommentItem = ({
             />
           </div>
           <div className="pl-3 dark:text-white text-black">
-            <h5 className="text-[20px]">{item?.user.name}</h5>
+            <h5 className="text-[20px]">
+              {item?.user.role === "admin" ? (
+                <Badge badgeContent="Giảng viên" color="primary">
+                  {item?.user.name}
+                </Badge>
+              ) : (
+                item?.user.name
+              )}
+            </h5>
             <p>{item?.question}</p>
             <small className="text-[#000000b8] dark:text-[#ffffff83]">
-              {!item.createdAt ? "" : format(item?.createdAt,'vi')} •
+              {!item.createdAt ? "" : format(item?.createdAt, "vi")} •
             </small>
           </div>
         </div>
@@ -589,9 +606,9 @@ const CommentItem = ({
           >
             {!replyActive
               ? item.questionReplies.length !== 0
-                ? "All Replies"
-                : "Add Reply"
-              : "Hide Replies"}
+                ? "Tất cả câu trả lời"
+                : "Thêm trả lời"
+              : "Ẩn trả lời"}
           </span>
           <BiMessage
             size={20}
@@ -602,10 +619,13 @@ const CommentItem = ({
           </span>
         </div>
 
-        {replyActive && questionId === item._id &&  (
+        {replyActive && questionId === item._id && (
           <>
             {item.questionReplies.map((item: any) => (
-              <div className="w-full flex 800px:ml-16 my-5 text-black dark:text-white" key={item._id}>
+              <div
+                className="w-full flex 800px:ml-16 my-5 text-black dark:text-white"
+                key={item._id}
+              >
                 <div>
                   <Image
                     src={
@@ -628,7 +648,7 @@ const CommentItem = ({
                   </div>
                   <p>{item.answer}</p>
                   <small className="text-[#ffffff83]">
-                    {format(item.createdAt,'vi')} •
+                    {format(item.createdAt, "vi")} •
                   </small>
                 </div>
               </div>

@@ -23,8 +23,6 @@ import { useSession } from "next-auth/react";
 import { useSocialAuthMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import Badge from "@mui/material/Badge";
-import { useCart } from "../context/CartContext";
-import Cart from "./Cart/Cart";
 import { Modal, Box } from "@mui/material";
 
 type Props = {
@@ -42,8 +40,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
-  const { cart } = useCart();
-  const [openCart, setOpenCart] = useState(false);
 
   const {
     data: userData,
@@ -90,10 +86,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         setOpenSidebar(false);
       }
     }
-  };
-
-  const handleCloseCart = () => {
-    setOpenCart(false);
   };
 
   return (
@@ -148,38 +140,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                   onClick={() => setOpen(true)}
                 />
               )}
-              <div className="flex items-center justify-center mx-4">
-                <Badge badgeContent={cart?.length} color="primary">
-                  <HiOutlineShoppingCart
-                    className="cursor-pointer dark:text-white text-black"
-                    size={28}
-                    onClick={()=> setOpenCart(true)}
-                  />
-                </Badge>
-                <Modal
-                  open={openCart}
-                  onClose={handleCloseCart}
-                  aria-labelledby="cart-modal-title"
-                  aria-describedby="cart-modal-description"
-                >
-                  <Box
-                    sx={{
-                      position: "fixed",
-                      top: "35%",
-                      left: "80%",
-                      transform: "translate(-50%, -50%)",
-                      width: 600,
-                      bgcolor: "background.paper",
-                      border: "2px solid #000",
-                      boxShadow: 24,
-                      p: 4,
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Cart />
-                  </Box>
-                </Modal>
-              </div>
             </div>
           </div>
         </div>

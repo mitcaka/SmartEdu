@@ -16,7 +16,6 @@ import { VscVerifiedFilled } from "react-icons/vsc";
 import { formatCurrency } from "@/app/utils/Format";
 import vi from "timeago.js/lib/lang/vi";
 import { HiShoppingCart } from "react-icons/hi";
-import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 
 register("vi", vi);
@@ -38,7 +37,6 @@ const CourseDetails = ({
   const { data: userData, refetch } = useLoadUserQuery(undefined, {});
   const [user, setUser] = useState<any>();
   const [open, setOpen] = useState(false);
-  const {cart, addToCart} = useCart();
   useEffect(() => {
     setUser(userData?.user);
   }, [userData]);
@@ -264,17 +262,6 @@ const CourseDetails = ({
                       onClick={handleOrder}
                     >
                       Mua ngay {formatCurrency(data.price)}
-                    </div>
-                    <div
-                      className={`${styles.button} !w-[200px] mx-8 font-Poppins cursor-pointer !bg-cyan-600 text-center text-white`}
-                      onClick={() => addToCart(data)}
-                    >
-                      <HiShoppingCart
-                        className="cursor-pointer text-white"
-                        fill="white"
-                        size={28}
-                      />
-                      Thêm giỏ hàng
                     </div>
                   </div>
                 )}
