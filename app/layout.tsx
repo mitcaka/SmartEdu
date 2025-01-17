@@ -4,6 +4,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { Josefin_Sans } from "next/font/google";
 import { ThemeProvider } from "./utils/theme-provider";
+import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
@@ -11,7 +12,7 @@ import { FC, useEffect } from "react";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 import Loader from "./components/Loader/Loader";
 import socketIO from "socket.io-client";
-import { Suspense } from 'react';
+import { Suspense } from "react";
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
@@ -39,12 +40,18 @@ export default function RootLayout({
       >
         <Providers>
           <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Suspense fallback={<Loader/>}>
-              <Custom>{children}</Custom>
-              <Toaster position="top-center" reverseOrder={false} />
-              </Suspense>
-            </ThemeProvider>
+            <CartProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                <Suspense fallback={<Loader />}>
+                  <Custom>{children}</Custom>
+                  <Toaster position="top-center" reverseOrder={false} />
+                </Suspense>
+              </ThemeProvider>
+            </CartProvider>
           </SessionProvider>
         </Providers>
       </body>

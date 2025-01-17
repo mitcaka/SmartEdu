@@ -22,7 +22,7 @@ const Page = (props: Props) => {
   const { data: categoriesData } = useGetHeroDataQuery("Categories", {});
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
-  const [courses, setcourses] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [category, setCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 8;
@@ -50,7 +50,7 @@ const Page = (props: Props) => {
         indexOfLastCourse
       );
 
-      setcourses(currentCourses);
+      setCourses(currentCourses);
     }
   }, [data, category, search, currentPage]);
   const totalPages = Math.ceil(data?.courses.length / perPage);

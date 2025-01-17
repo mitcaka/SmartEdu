@@ -31,10 +31,12 @@ const CourseDetailsPage = ({ id }: Props) => {
   useEffect(() => {
     if (config) {
       const publishablekey = config?.publishablekey;
+      console.log("publishablekey", publishablekey);
+      
       setStripePromise(loadStripe(publishablekey));
     }
     if (data && userData?.user) {
-      const amount = Math.round(data.course.price * 100);
+      const amount = Math.round(data.course.price * 0.0039);
       createPaymentIntent(amount);
     }
   }, [config, data, userData]);

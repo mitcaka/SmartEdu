@@ -15,8 +15,11 @@ import Image from "next/image";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { formatCurrency } from "@/app/utils/Format";
 import vi from "timeago.js/lib/lang/vi";
+import { HiShoppingCart } from "react-icons/hi";
+import { useCart } from "@/app/context/CartContext";
+import toast from "react-hot-toast";
 
-register('vi', vi);
+register("vi", vi);
 type Props = {
   data: any;
   stripePromise: any;
@@ -32,10 +35,10 @@ const CourseDetails = ({
   setRoute,
   setOpen: openAuthModal,
 }: Props) => {
-  const { data: userData,refetch } = useLoadUserQuery(undefined, {});
+  const { data: userData, refetch } = useLoadUserQuery(undefined, {});
   const [user, setUser] = useState<any>();
   const [open, setOpen] = useState(false);
-
+  const {cart, addToCart} = useCart();
   useEffect(() => {
     setUser(userData?.user);
   }, [userData]);
@@ -52,11 +55,11 @@ const CourseDetails = ({
     if (user) {
       setOpen(true);
     } else {
+      toast.error("Bạn chưa đăng nhập!!!")
       setRoute("Login");
       openAuthModal(true);
     }
   };
-  console.log("data: ",data);
   
   return (
     <div>
@@ -64,13 +67,13 @@ const CourseDetails = ({
         <div className="w-full flex flex-col-reverse 800px:flex-row">
           <div className="w-full 800px:w-[65%] 800px:pr-5">
             <Image
-                      src={data.thumbnail.url}
-                      width={500}
-                      height={300}
-                      objectFit="contain"
-                      className="rounded w-full"
-                      alt=""
-                    />
+              src={data.thumbnail.url}
+              width={500}
+              height={300}
+              objectFit="contain"
+              className="rounded w-full"
+              alt=""
+            />
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
               {data.name}
             </h1>
@@ -88,7 +91,7 @@ const CourseDetails = ({
 
             <br />
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
-            Bạn sẽ học được gì từ khóa học này?
+              Bạn sẽ học được gì từ khóa học này?
             </h1>
             <div>
               {data.benefits?.map((item: any, index: number) => (
@@ -111,7 +114,7 @@ const CourseDetails = ({
               <br />
             </div>
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
-            Yêu cầu cần có để bắt đầu khóa học này là gì?
+              Yêu cầu cần có để bắt đầu khóa học này là gì?
             </h1>
             {data.prerequisites?.map((item: any, index: number) => (
               <div className="w-full flex 800px:items-center py-2" key={index}>
@@ -185,12 +188,12 @@ const CourseDetails = ({
                           {item.comment}
                         </p>
                         <small className="text-[#000000d1] dark:text-[#ffffff83]">
-                          {format(item.createdAt,'vi')} •
+                          {format(item.createdAt, "vi")} •
                         </small>
                       </div>
                       <div className="pl-2 flex 800px:hidden items-center">
                         <h5 className="text-[18px] pr-2 text-black dark:text-white">
-                          {item.user.name} 
+                          {item.user.name}
                         </h5>
                         <Ratings rating={item.rating} />
                       </div>
@@ -212,14 +215,16 @@ const CourseDetails = ({
                         </div>
                         <div className="pl-2">
                           <div className="flex items-center">
-                            <h5 className="text-[18px] pr-2 text-black dark:text-white">{i.user.name}</h5>{" "}
+                            <h5 className="text-[18px] pr-2 text-black dark:text-white">
+                              {i.user.name}
+                            </h5>{" "}
                             <VscVerifiedFilled className="text-[#0095F6] ml-2 text-[20px]" />
                           </div>
                           <p className="text-black dark:text-white">
                             {i.comment}
                           </p>
                           <small className="text-[#000000d1] dark:text-[#ffffff83]">
-                            {format(i.createdAt,'vi')} •
+                            {format(i.createdAt, "vi")} •
                           </small>
                         </div>
                       </div>
@@ -253,11 +258,24 @@ const CourseDetails = ({
                     Vào học ngay
                   </Link>
                 ) : (
-                  <div
-                    className={`${styles.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
-                    onClick={handleOrder}
-                  >
-                    Mua ngay {formatCurrency(data.price)}
+                  <div className="flex justify-center">
+                    <div
+                      className={`${styles.button} !w-[180px] mx-6 font-Poppins cursor-pointer !bg-[crimson] text-center`}
+                      onClick={handleOrder}
+                    >
+                      Mua ngay {formatCurrency(data.price)}
+                    </div>
+                    <div
+                      className={`${styles.button} !w-[200px] mx-8 font-Poppins cursor-pointer !bg-cyan-600 text-center text-white`}
+                      onClick={() => addToCart(data)}
+                    >
+                      <HiShoppingCart
+                        className="cursor-pointer text-white"
+                        fill="white"
+                        size={28}
+                      />
+                      Thêm giỏ hàng
+                    </div>
                   </div>
                 )}
               </div>
@@ -292,7 +310,12 @@ const CourseDetails = ({
               <div className="w-full">
                 {stripePromise && clientSecret && (
                   <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckOutForm setOpen={setOpen} data={data} user={user} refetch={refetch} />
+                    <CheckOutForm
+                      setOpen={setOpen}
+                      data={data}
+                      user={user}
+                      refetch={refetch}
+                    />
                   </Elements>
                 )}
               </div>

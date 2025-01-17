@@ -27,7 +27,6 @@ const CheckOutForm = ({ data,user,refetch }: Props) => {
   const [message, setMessage] = useState<any>("");
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
   const [isLoading, setIsLoading] = useState(false);
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!stripe || !elements) {
@@ -46,8 +45,8 @@ const CheckOutForm = ({ data,user,refetch }: Props) => {
       createOrder({ courseId: data._id, payment_info: paymentIntent });
       toast.success("Thanh toán thành công!");
     }
+    
   };
-
   useEffect(() => {
    if(orderData){
     refetch();
@@ -76,7 +75,6 @@ const CheckOutForm = ({ data,user,refetch }: Props) => {
           {isLoading ? "Đang thanh toán..." : "Thanh toán ngay"}
         </span>
       </button>
-      {/* Show any error or success messages */}
       {message && (
         <div id="payment-message" className="text-[red] font-Poppins pt-2">
           {message}
