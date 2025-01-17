@@ -24,7 +24,7 @@ const page: FC<Props> = (props: Props) => {
       <Protected>
         <Heading
           title={`${user?.name} profile - Smart Edu`}
-          description="SmartEdu is a platform for students to learn and get help from teachers"
+          description="SmartEdu SmartEdu là nền tảng học trực tuyến số 1 Việt Nam"
           keywords="Prograaming,MERN,Redux,Machine Learning"
         />
         <Header

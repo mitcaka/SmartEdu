@@ -18,7 +18,7 @@ const Page = (props: Props) => {
     <div>
       <Heading
         title="Giới thiệu - SmartEdu"
-        description="SmartEdu is a learning management system for helping programmers."
+        description="SmartEdu là nền tảng học tập trực tuyến số 1 Việt Nam."
         keywords="programming,mern"
       />
       <Header

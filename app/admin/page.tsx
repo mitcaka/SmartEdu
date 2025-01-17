@@ -15,7 +15,7 @@ const page = (props: Props) => {
       <AdminProtected>
         <Heading
           title="SmartEdu - Admin"
-          description="SmartEdu is a platform for students to learn and get help from teachers"
+          description="SmartEdu SmartEdu là nền tảng học trực tuyến số 1 Việt Nam"
           keywords="Programming,MERN,Redux,Machine Learning"
         />
         <div className="flex min-h-screen">
