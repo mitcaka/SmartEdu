@@ -65,10 +65,10 @@ const CoursePreview: FC<Props> = ({
             Mua ngay {formatCurrency(courseData?.price)}
           </div>
         </div>
-        <p className="pb-1">• Source code included</p>
-        <p className="pb-1">• Full lifetime access</p>
-        <p className="pb-1">• Certificate of completion</p>
-        <p className="pb-3 800px:pb-1">• Premium Support</p>
+        <p className="pb-1">• Tài nguyên khóa học</p>
+        <p className="pb-1">• Quyền truy cập trọn đời</p>
+        <p className="pb-1">• Chứng chỉ hoàn thành</p>
+        <p className="pb-3 800px:pb-1">• Hỗ trợ mọi lúc mọi nơi</p>
       </div>
       <div className="w-full">
         <div className="w-full 800px:pr-5">
