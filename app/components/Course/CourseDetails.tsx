@@ -47,7 +47,7 @@ const CourseDetails = ({
   const discountPercentengePrice = dicountPercentenge.toFixed(0);
 
   const isPurchased =
-    user && user?.courses?.find((item: any) => item._id === data._id);
+    user && user?.courses?.find((item: any) => item._id === data._id) || user?.role === "admin";
 
   const handleOrder = (e: any) => {
     if (user) {

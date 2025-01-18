@@ -17,6 +17,8 @@ const CourseContent = ({ id,user }: Props) => {
   const [open, setOpen] = useState(false);
   const [route, setRoute] = useState('Login')
   const data = contentData?.content;
+  console.log(data);
+  
 
   const [activeVideo, setActiveVideo] = useState(0);
 

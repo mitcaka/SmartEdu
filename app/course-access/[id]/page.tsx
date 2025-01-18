@@ -15,21 +15,22 @@ const Page = ({params}: Props) => {
     const unwrappedParams: any = React.use(params);
     const id = unwrappedParams.id;
   const { isLoading, error, data,refetch } = useLoadUserQuery(undefined, {});
-
+  
   useEffect(() => {
     if (data) {
       const isPurchased = data.user.courses.find(
         (item: any) => item._id === id
-      );
+      ) || data.user.role === "admin";
       if (!isPurchased) {
         redirect("/");
       }
+      console.log("isPurchased ", isPurchased);
     }
     if (error) {
       redirect("/");
     }
-  }, [data,error]);
-
+  }, [data, error]);
+  
   return (
    <>
    {
